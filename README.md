@@ -13,6 +13,6 @@ Architecture : DDD (Domain Driven Design)
 Development Methodology : TDD (Tedst-Driven Development)
 
 ### 개발자/기여자
-- (BE) (https://github.com/geonoo)[이건우]
-- (BE) (https://github.com/secretj)[박진형]
-- (BE) (https://github.com/turtleYJ)[정유일]
+- (BE) [이건우](https://github.com/geonoo)
+- (BE) [박진형](https://github.com/secretj)
+- (BE) [정유일](https://github.com/turtleYJ)
