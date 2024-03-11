@@ -6,11 +6,11 @@
 2. 회사 간 중고거래 : 동일 업종 혹은 관련된 업종에 속한 회사들 간에 필요한 물품을 효율적으로 재활용할 수 있는 기회를 제공합니다.
 
 ## 기술 스택
-language : JAVA 17
-Framework : Spring Boot 3.2.3
-DB : H2 database, Spring Data JPA(ORM)
-Architecture : DDD (Domain Driven Design)
-Development Methodology : TDD (Tedst-Driven Development)
+language : JAVA 17  
+Framework : Spring Boot 3.2.3  
+DB : H2 database, Spring Data JPA(ORM)  
+Architecture : DDD (Domain Driven Design)  
+Development Methodology : TDD (Tedst-Driven Development)  
 
 ### 개발자/기여자
 - (BE) [이건우](https://github.com/geonoo)
