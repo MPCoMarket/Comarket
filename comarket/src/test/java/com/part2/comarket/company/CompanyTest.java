@@ -83,7 +83,7 @@ public class CompanyTest {
 
         //when
         updateCompanyService.updateCompany(companyId, updateRequest);
-        final CompanyResponseDTO company = companyService.getCompany(companyId);
+        CompanyResponseDTO company = companyService.getCompany(companyId);
 
         //then
         assertThat(company.id()).isEqualTo(companyId);
