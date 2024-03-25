@@ -1,6 +1,6 @@
 package com.part2.comarket.product;
 
-import com.part2.comarket.product.command.application.ProductService;
+import com.part2.comarket.product.command.application.AddProductService;
 import com.part2.comarket.product.command.dto.request.ProductPostRequestDTO;
 import com.part2.comarket.product.command.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
@@ -13,14 +13,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class ProductCreateTest {
 
     @Autowired
-    private ProductService productService;
+    private AddProductService addProductService;
 
     @Autowired
     private ProductRepository productRepository;
     @Test
     void 상품_등록() {
         final ProductPostRequestDTO request = 상품_등록_요청();
-        productService.addProduct(request);
+        addProductService.addProduct(request);
     }
 
     private static ProductPostRequestDTO 상품_등록_요청() {

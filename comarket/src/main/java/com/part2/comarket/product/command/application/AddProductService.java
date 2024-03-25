@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class ProductService {
+public class AddProductService {
     private final ProductRepository productRepository;
 
     @Transactional

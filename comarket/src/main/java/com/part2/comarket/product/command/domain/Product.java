@@ -1,8 +1,12 @@
 package com.part2.comarket.product.command.domain;
 
+import com.part2.comarket.product.command.dto.request.ProductPatchRequestDTO;
+import com.part2.comarket.product.command.dto.request.ProductPostRequestDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.Optional;
 
 @Entity
 @Table(name = "product")
@@ -33,5 +37,15 @@ public class Product {
         this.title = title;
         this.price = price;
         this.content = content;
+    }
+
+    public void update(ProductPatchRequestDTO requestDto) {
+        Optional.ofNullable(requestDto.title()).ifPresent(title->this.title = title);
+        Optional.ofNullable(requestDto.content()).ifPresent(content->this.content = content);
+        Optional.ofNullable(requestDto.price())
+                .filter(price -> price >=0)
+                .ifPresent(price->this.price = price);
+        Optional.ofNullable(requestDto.tradingLocation()).ifPresent(tradingLocation->this.tradingLocation = tradingLocation);
+
     }
 }
