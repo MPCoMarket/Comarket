@@ -1,9 +1,11 @@
 package com.part2.comarket.company;
 
+import com.part2.comarket.company.command.application.DeleteCompanyService;
 import com.part2.comarket.company.command.application.SaveCompanyService;
+import com.part2.comarket.company.command.application.UpdateCompanyService;
 import com.part2.comarket.company.command.domain.Company;
+import com.part2.comarket.company.command.dto.request.CompanyPatchDTO;
 import com.part2.comarket.company.command.dto.request.CompanyPostDTO;
-import com.part2.comarket.company.command.repository.CompanyRepository;
 import com.part2.comarket.company.query.application.CompanyService;
 import com.part2.comarket.company.query.dto.response.CompanyResponseDTO;
 import com.part2.comarket.common.exception.CustomException;
@@ -21,17 +23,18 @@ public class CompanyTest {
     private SaveCompanyService saveCompanyService;
 
     @Autowired
-    private CompanyService companyService;
+    private UpdateCompanyService updateCompanyService;
 
     @Autowired
-    private CompanyRepository companyRepository;
+    private DeleteCompanyService deleteCompanyService;
+
+    @Autowired
+    private CompanyService companyService;
 
     @Test
     void 회사_등록() {
         final CompanyPostDTO request = CompanySteps.회사_등록_요청_DTO();
-        saveCompanyService.addCompany(request);
-
-        final Company company = companyRepository.findAll().get(0);
+        Company company = saveCompanyService.addCompany(request);
 
         System.out.print("날짜:"+company.getCreatedDate());
 
@@ -46,8 +49,8 @@ public class CompanyTest {
     public void 회사_조회_성공(){
         //given
         final CompanyPostDTO request = CompanySteps.회사_등록_요청_DTO();
-        saveCompanyService.addCompany(request);
-        final Long companyId = 1L;
+        Company createdCompany = saveCompanyService.addCompany(request);
+        final Long companyId = createdCompany.getId();
 
         //when
         final CompanyResponseDTO company = companyService.getCompany(companyId);
@@ -66,6 +69,51 @@ public class CompanyTest {
         final Long companyId = 0L;
 
         //when
+        //then
+        assertThrows(CustomException.class, () -> companyService.getCompany(companyId));
+    }
+
+    @Test
+    public void 회사_수정_성공() {
+        //given
+        final CompanyPostDTO request = CompanySteps.회사_등록_요청_DTO();
+        Company createdCompany = saveCompanyService.addCompany(request);
+        final Long companyId = createdCompany.getId();
+        final CompanyPatchDTO updateRequest = new CompanyPatchDTO("수정된회사이름", "수정된사업자등록번호", "수정된소재지", "수정된대표자이름");
+
+        //when
+        updateCompanyService.updateCompany(companyId, updateRequest);
+        CompanyResponseDTO company = companyService.getCompany(companyId);
+
+        //then
+        assertThat(company.id()).isEqualTo(companyId);
+        assertThat(company.name()).isEqualTo(updateRequest.name());
+        assertThat(company.registeredNumber()).isEqualTo(updateRequest.registeredNumber());
+        assertThat(company.location()).isEqualTo(updateRequest.location());
+        assertThat(company.ownerName()).isEqualTo(updateRequest.ownerName());
+    }
+
+    @Test
+    public void 회사_수정_실패() {
+        //given
+        final Long companyId = 0L;
+        final CompanyPatchDTO updateRequest = new CompanyPatchDTO("수정된회사이름", "수정된사업자등록번호", "수정된소재지", "수정된대표자이름");
+
+        //when
+        //then
+        assertThrows(CustomException.class, () -> updateCompanyService.updateCompany(companyId, updateRequest));
+    }
+
+    @Test
+    public void 회사_삭제_성공() {
+        //given
+        final CompanyPostDTO request = CompanySteps.회사_등록_요청_DTO();
+        Company createdCompany = saveCompanyService.addCompany(request);
+        final Long companyId = createdCompany.getId();
+
+        //when
+        deleteCompanyService.deleteCompany(companyId);
+
         //then
         assertThrows(CustomException.class, () -> companyService.getCompany(companyId));
     }
