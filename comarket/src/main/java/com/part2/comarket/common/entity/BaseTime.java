@@ -1,4 +1,4 @@
-package com.part2.comarket.company.common.entity;
+package com.part2.comarket.common.entity;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
