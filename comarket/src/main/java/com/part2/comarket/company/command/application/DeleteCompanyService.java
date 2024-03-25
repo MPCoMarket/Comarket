@@ -1,18 +1,18 @@
 package com.part2.comarket.company.command.application;
 
-import com.part2.comarket.company.command.domain.Company;
-import com.part2.comarket.company.command.dto.request.CompanyPostDTO;
 import com.part2.comarket.company.command.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class SaveCompanyService {
+public class DeleteCompanyService {
 
     private final CompanyRepository companyRepository;
 
-    public Company addCompany(CompanyPostDTO request) {
-        return companyRepository.save(request.toEntity());
+    @Transactional
+    public void deleteCompany(Long companyId) {
+        companyRepository.deleteById(companyId);
     }
 }
