@@ -3,6 +3,7 @@ package com.part2.comarket.member.controller;
 import com.part2.comarket.member.command.application.MemberService;
 import com.part2.comarket.member.command.domain.Member;
 import com.part2.comarket.member.controller.request.CreateMemberRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/members")
 public class MemberController {
 
+    @Autowired
     private final MemberService memberService;
 
     // 생성자를 통한 MemberService 주입
