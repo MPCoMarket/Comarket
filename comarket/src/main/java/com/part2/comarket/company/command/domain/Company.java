@@ -1,6 +1,7 @@
 package com.part2.comarket.company.command.domain;
 
 
+import com.part2.comarket.company.command.dto.request.CompanyPatchDTO;
 import com.part2.comarket.company.command.value.SecretKey;
 import com.part2.comarket.common.entity.BaseTime;
 import jakarta.persistence.*;
@@ -29,5 +30,12 @@ public class Company extends BaseTime {
         this.location = location;
         this.ownerName = ownerName;
         this.secretKey = SecretKey.generateKey();
+    }
+
+    public void update(CompanyPatchDTO request) {
+        this.name = !request.name().isBlank() ? request.name() : this.name;
+        this.registeredNumber = !request.registeredNumber().isBlank() ? request.registeredNumber() : this.registeredNumber;
+        this.location = !request.location().isBlank() ? request.location() : this.location;
+        this.ownerName = !request.ownerName().isBlank() ? request.ownerName() : this.ownerName;
     }
 }
