@@ -26,7 +26,7 @@ public class MemberApiTest extends ApiTest {
     @Test
     void 회원가입_테스트() {
         // given
-        Member newMember = new Member("test@exemple.com", "password", "TestUser");
+        Member newMember = new Member("test@exemple.com", "000-0000-0000", "password", "TestUser");
 
         // when
         Member member = memberService.register(newMember);
@@ -55,9 +55,11 @@ public class MemberApiTest extends ApiTest {
 
     private CreateMemberRequest 회원가입요청_생성() {
         final String email = "yooil405@naver.com";
+        final String phoneNumber = "000-0000-0000";
         final String password = "0000";
-        final String name = "정유일";
-        return new CreateMemberRequest(email, password, name);
+        final String userName = "정유일";
+        final String secretKey = "KRIkVUsRgiCov+6evBHHjtLsvgktOTqOBVXK02dZVXk=";
+        return new CreateMemberRequest(email, phoneNumber, password, userName, secretKey);
     }
 
 }

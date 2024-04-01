@@ -1,38 +1,55 @@
 package com.part2.comarket.member.command.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.part2.comarket.company.command.domain.Company;
+import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "Member")
 @NoArgsConstructor
 public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id = 1L;
+    private Long id;
     private String email;
+    private String phoneNumber;
     private String password;
-    private String name;
+    private String userName;
 
-    public Member(String email, String password, String name) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "companyId")
+    private Company company;
+
+    public Member(String email, String phoneNumber, String password, String userName) {
         this.email = email;
+        this.phoneNumber = phoneNumber;
         this.password = password;
-        this.name = name;
+        this.userName = userName;
     }
 
-
     public Long getId() {
-        return this.id;
+        return id;
     }
 
     public String getEmail() {
-        return this.email;
+        return email;
     }
 
-    public void assignId(Long id) {
-        this.id = id;
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }

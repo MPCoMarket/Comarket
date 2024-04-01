@@ -27,7 +27,7 @@ public class MemberController {
     public ResponseEntity<Void> createMember(
             @RequestBody CreateMemberRequest request) {
 //      멤버 생성로직 캡슐화 필요
-        memberService.register(new Member(request.email(), request.password(), request.name()));
+        memberService.register(new Member(request.email(), request.secretKey(), request.password(), request.name()));
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
