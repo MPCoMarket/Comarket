@@ -1,4 +1,4 @@
-package com.part2.comarket.product.command.repository;
+package com.part2.comarket.product.query.repository;
 
 import com.part2.comarket.product.command.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
