@@ -19,6 +19,10 @@ public class Company {
 //    private String ownerName;
     private String secretKey = "KRIkVUsRgiCov+6evBHHjtLsvgktOTqOBVXK02dZVXk=";
 
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
+
 //    public void update(CompanyPatchDTO request) {
 //        this.name = !request.name().isBlank() ? request.name() : this.name;
 //        this.registeredNumber = !request.registeredNumber().isBlank() ? request.registeredNumber() : this.registeredNumber;
