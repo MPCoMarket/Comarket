@@ -6,12 +6,16 @@ import com.part2.comarket.company.command.application.UpdateCompanyService;
 import com.part2.comarket.company.command.dto.request.CompanyPatchDTO;
 import com.part2.comarket.company.command.dto.request.CompanyPostDTO;
 import com.part2.comarket.company.query.application.CompanyService;
+import com.part2.comarket.company.query.application.SearchCompanyService;
 import com.part2.comarket.company.query.dto.response.CompanyResponseDTO;
+import com.part2.comarket.company.query.dto.response.SearchCompanyResponseDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/companies")
@@ -22,6 +26,7 @@ public class CompanyController {
     private final UpdateCompanyService updateCompanyService;
     private final DeleteCompanyService deleteCompanyService;
     private final CompanyService companyService;
+    private final SearchCompanyService searchCompanyService;
 
     @PostMapping
     public ResponseEntity<Void> saveCompany(@Valid @RequestBody final CompanyPostDTO request) {
@@ -46,5 +51,12 @@ public class CompanyController {
         deleteCompanyService.deleteCompany(companyId);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<SearchCompanyResponseDTO>> searchCompany(@RequestParam(value = "keyword") final String keyword) {
+        final List<SearchCompanyResponseDTO> companies = searchCompanyService.searchCompany(keyword);
+        return ResponseEntity.ok(companies);
+    }
+
 
 }
