@@ -33,6 +33,8 @@ public class Product extends BaseTime {
     private char isDeleted;
     // 조회수
     private int viewCnt;
+    // 카테고리 아이디
+    private String CategoryId;
 
     public Product(String title, int price, String content) {
         this.title = title;
