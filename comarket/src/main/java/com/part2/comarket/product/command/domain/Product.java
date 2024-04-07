@@ -1,5 +1,6 @@
 package com.part2.comarket.product.command.domain;
 
+import com.part2.comarket.common.entity.BaseTime;
 import com.part2.comarket.product.command.dto.request.ProductPatchRequestDTO;
 import com.part2.comarket.product.command.dto.request.ProductPostRequestDTO;
 import jakarta.persistence.*;
@@ -12,7 +13,7 @@ import java.util.Optional;
 @Table(name = "product")
 @NoArgsConstructor
 @Getter
-public class Product {
+public class Product extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

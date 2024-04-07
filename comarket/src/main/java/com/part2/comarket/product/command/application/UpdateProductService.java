@@ -1,5 +1,7 @@
 package com.part2.comarket.product.command.application;
 
+import com.part2.comarket.common.exception.CustomException;
+import com.part2.comarket.common.exception.ErrorCode;
 import com.part2.comarket.product.command.domain.Product;
 import com.part2.comarket.product.command.dto.request.ProductPatchRequestDTO;
 import com.part2.comarket.product.command.repository.ProductRepository;
@@ -15,7 +17,7 @@ public class UpdateProductService {
     @Transactional
     public void updateProduct(Long productId, ProductPatchRequestDTO request) {
         Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new IllegalArgumentException("수정하려는 상품 정보가 없습니다.")); // to do : 예외처리
+                .orElseThrow(() -> new CustomException(ErrorCode.PRODUCT_NOT_FOUND));
         product.update(request);
     }
 }

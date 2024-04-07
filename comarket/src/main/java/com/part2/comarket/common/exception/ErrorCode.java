@@ -8,6 +8,7 @@ public enum ErrorCode {
 
     
     COMPANY_NOT_FOUND(HttpStatus.NOT_FOUND, "404", "Company not found."),
+    PRODUCT_NOT_FOUND(HttpStatus.NOT_FOUND, "404", "Product not found.")
     ;
 
     private HttpStatus httpStatus;
