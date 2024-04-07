@@ -1,5 +1,6 @@
 package com.part2.comarket.product.command.application;
 
+import com.part2.comarket.product.command.domain.Product;
 import com.part2.comarket.product.command.dto.request.ProductPostRequestDTO;
 import com.part2.comarket.product.command.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ public class AddProductService {
     private final ProductRepository productRepository;
 
     @Transactional
-    public void addProduct(ProductPostRequestDTO request) {
-        productRepository.save(request.toEntity());
+    public Product addProduct(ProductPostRequestDTO request) {
+        return productRepository.save(request.toEntity());
     }
 }

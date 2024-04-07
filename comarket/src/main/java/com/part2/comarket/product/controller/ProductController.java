@@ -9,7 +9,6 @@ import com.part2.comarket.product.command.dto.request.ProductPostRequestDTO;
 import com.part2.comarket.product.query.application.ProductService;
 import com.part2.comarket.product.query.dto.ProductDTO;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
