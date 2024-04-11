@@ -35,19 +35,19 @@ public class CompanyController {
     }
 
     @GetMapping("/{companyId}")
-    public ResponseEntity<CompanyResponseDTO> getCompany(@PathVariable final Long companyId) {
+    public ResponseEntity<CompanyResponseDTO> getCompany(@PathVariable(name = "companyId") final Long companyId) {
         final CompanyResponseDTO company = companyService.getCompany(companyId);
         return ResponseEntity.ok(company);
     }
 
     @PatchMapping("/{companyId}")
-    public ResponseEntity<Void> updateCompany(@PathVariable final Long companyId, @Valid @RequestBody final CompanyPatchDTO request) {
+    public ResponseEntity<Void> updateCompany(@PathVariable(name = "companyId") final Long companyId, @Valid @RequestBody final CompanyPatchDTO request) {
         updateCompanyService.updateCompany(companyId, request);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{companyId}")
-    public ResponseEntity<Void> deleteCompany(@PathVariable final Long companyId) {
+    public ResponseEntity<Void> deleteCompany(@PathVariable(name = "companyId") final Long companyId) {
         deleteCompanyService.deleteCompany(companyId);
         return ResponseEntity.ok().build();
     }

@@ -1,5 +1,7 @@
 package com.part2.comarket.company.infra.company;
 
+import com.part2.comarket.common.exception.CustomException;
+import com.part2.comarket.common.exception.ErrorCode;
 import com.part2.comarket.company.command.domain.Company;
 import com.part2.comarket.company.query.application.SearchCompanyService;
 import com.part2.comarket.company.query.dto.response.SearchCompanyResponseDTO;
@@ -7,16 +9,20 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Service;
 
+import javax.net.ssl.SSLHandshakeException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrawlingSearchCompany implements SearchCompanyService {
+@Service
+public class CrawlingSearchCompanyService implements SearchCompanyService {
+
+    private static final String BASE_URL = "https://bizno.net/?query=";
     @Override
     public List<SearchCompanyResponseDTO> searchCompany(String keyword) {
-        String url = "https://bizno.net/?query=";
-        url += keyword;
+        String url = BASE_URL + keyword;
         List<Company> companies = new ArrayList<>();
         List<SearchCompanyResponseDTO> companyResponseDTOS = new ArrayList<>();
         try {
@@ -38,11 +44,13 @@ public class CrawlingSearchCompany implements SearchCompanyService {
 
                 // 회사 정보 추가
                 // 추후에 비동기로 DB에 저장하는 로직 추가
-                Company company = new Company(companyName, ceoName, address, registrationNumber);
+                Company company = new Company(companyName, registrationNumber, address, ceoName);
                 companies.add(company);
 
                 companyResponseDTOS.add(SearchCompanyResponseDTO.fromEntity(company));
             }
+        } catch (SSLHandshakeException e) {
+            throw new CustomException(ErrorCode.COMPANY_CRAWLING_ERROR);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

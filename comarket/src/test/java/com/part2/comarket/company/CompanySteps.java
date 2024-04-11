@@ -61,4 +61,13 @@ public class CompanySteps {
                 .log().all()
                 .extract();
     }
+
+    public static ExtractableResponse<Response> 회사_크롤링_조회_요청(String keyword) {
+        return RestAssured.given().log().all()
+                .when()
+                .get("/companies/search?keyword={keyword}", keyword)
+                .then()
+                .log().all()
+                .extract();
+    }
 }
