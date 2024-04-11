@@ -12,4 +12,8 @@ public record SearchCompanyResponseDTO(
     public static SearchCompanyResponseDTO fromEntity(Company company) {
         return new SearchCompanyResponseDTO(company.getName(), company.getRegisteredNumber(), company.getLocation(), company.getOwnerName());
     }
+
+    public static Company toEntity(SearchCompanyResponseDTO dto) {
+        return new Company(dto.name(), dto.registeredNumber(), dto.location(), dto.ownerName());
+    }
 }
