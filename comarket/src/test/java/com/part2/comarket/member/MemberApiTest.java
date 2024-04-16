@@ -46,7 +46,7 @@ public class MemberApiTest extends ApiTest {
         newMember.setCompany(company);
 
         when(companyRepository.findBySecretKey(secretKey)).thenReturn(Optional.of(company));
-        when(memberRepository.save(Mockito.any(Member.class))).thenReturn(newMember);
+//        when(memberRepository.save(Mockito.any(Member.class))).thenReturn(newMember);
 
         // when
         Member registeredMember = memberService.register(newMember);

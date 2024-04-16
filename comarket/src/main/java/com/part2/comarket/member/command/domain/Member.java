@@ -2,7 +2,6 @@ package com.part2.comarket.member.command.domain;
 
 import com.part2.comarket.company.command.domain.Company;
 import jakarta.persistence.*;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -18,7 +17,7 @@ public class Member {
     private String password;
     private String userName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "companyId")
     private Company company;
 
@@ -28,6 +27,7 @@ public class Member {
         this.password = password;
         this.userName = userName;
     }
+
 
     public Long getId() {
         return id;
