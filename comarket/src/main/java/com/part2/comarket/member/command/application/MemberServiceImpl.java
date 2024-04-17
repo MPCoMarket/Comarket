@@ -17,7 +17,7 @@ public class MemberServiceImpl implements MemberService{
 //        this.memberRepository = memberRepository;
 //    }
 
-    public Member register(Member member) {
+    public Member registerMember(Member member) {
         return memberRepository.save(member);
     }
 

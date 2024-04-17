@@ -49,7 +49,7 @@ public class MemberApiTest extends ApiTest {
 //        when(memberRepository.save(Mockito.any(Member.class))).thenReturn(newMember);
 
         // when
-        Member registeredMember = memberService.register(newMember);
+        Member registeredMember = memberService.registerMember(newMember);
         Member foundMember = memberService.findById(registeredMember.getId())
                 .orElseThrow(() -> new NoSuchElementException("해당 ID의 회원을 찾을 수 없습니다."));
 

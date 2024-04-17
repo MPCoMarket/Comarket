@@ -2,6 +2,7 @@ package com.part2.comarket.member.controller;
 
 import com.part2.comarket.member.command.application.MemberService;
 import com.part2.comarket.member.command.domain.Member;
+import com.part2.comarket.member.command.dto.request.MemberCreateDTO;
 import com.part2.comarket.member.controller.request.CreateMemberRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,9 +26,9 @@ public class MemberController {
 
     @PostMapping
     public ResponseEntity<Void> createMember(
-            @RequestBody CreateMemberRequest request) {
+            @RequestBody MemberCreateDTO request) {
 //      멤버 생성로직 캡슐화 필요
-        memberService.register(new Member(request.email(), request.secretKey(), request.password(), request.name()));
+        memberService.registerMember(request.toEntity());
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

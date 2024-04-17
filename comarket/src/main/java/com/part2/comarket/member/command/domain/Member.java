@@ -28,6 +28,8 @@ public class Member {
         this.userName = userName;
     }
 
+    public Member() {}
+
 
     public Long getId() {
         return id;
