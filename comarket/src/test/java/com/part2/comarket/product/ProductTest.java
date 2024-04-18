@@ -1,6 +1,7 @@
 package com.part2.comarket.product;
 
 import com.part2.comarket.ApiTest;
+import com.part2.comarket.common.exception.CustomException;
 import com.part2.comarket.product.command.application.AddProductService;
 import com.part2.comarket.product.command.application.DeleteProductService;
 import com.part2.comarket.product.command.application.UpdateProductService;
@@ -65,7 +66,7 @@ public class ProductTest extends ApiTest {
         //when
         deleteProductService.deleteProduct(product.getId());
         //then
-        assertThrows(IllegalArgumentException.class, () -> productService.getProduct(product.getId()));
+        assertThrows(CustomException.class, () -> productService.getProduct(product.getId()));
     }
 
     private static ProductPostRequestDTO 상품_등록_요청() {
