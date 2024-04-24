@@ -133,14 +133,13 @@ public class CompanyTest {
         //when
         //then
         assertThat(companyList.size()).isEqualTo(1);
-        for(SearchCompanyResponseDTO company : companyList){
-            System.out.println(company.name());
-            System.out.println(company.registeredNumber());
-            System.out.println(company.location());
-            System.out.println(company.ownerName());
-        }
+//        for(SearchCompanyResponseDTO company : companyList){
+//            System.out.println(company.name());
+//            System.out.println(company.registeredNumber());
+//            System.out.println(company.location());
+//            System.out.println(company.ownerName());
+//        }
 
         assertThat(companyList.get(0).registeredNumber()).isEqualTo("2118703011");
     }
-
 }
