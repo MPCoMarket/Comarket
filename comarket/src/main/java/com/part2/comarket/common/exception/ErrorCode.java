@@ -8,6 +8,8 @@ public enum ErrorCode {
 
     
     COMPANY_NOT_FOUND(HttpStatus.NOT_FOUND, "404", "Company not found."),
+    COMPANY_CRAWLING_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "500", "SSL Handshake Error"),
+    COMPANY_NOT_FOUND_BY_REGISTERED_NUMBER(HttpStatus.NOT_FOUND, "404", "Company not found by registered number."),
     ;
 
     private HttpStatus httpStatus;

@@ -1,5 +1,6 @@
 package com.part2.comarket.company;
 
+import com.part2.comarket.common.exception.CustomException;
 import com.part2.comarket.company.command.application.DeleteCompanyService;
 import com.part2.comarket.company.command.application.SaveCompanyService;
 import com.part2.comarket.company.command.application.UpdateCompanyService;
@@ -7,11 +8,14 @@ import com.part2.comarket.company.command.domain.Company;
 import com.part2.comarket.company.command.dto.request.CompanyPatchDTO;
 import com.part2.comarket.company.command.dto.request.CompanyPostDTO;
 import com.part2.comarket.company.query.application.CompanyService;
+import com.part2.comarket.company.query.application.SearchCompanyService;
 import com.part2.comarket.company.query.dto.response.CompanyResponseDTO;
-import com.part2.comarket.common.exception.CustomException;
+import com.part2.comarket.company.query.dto.response.SearchCompanyResponseDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -30,6 +34,9 @@ public class CompanyTest {
 
     @Autowired
     private CompanyService companyService;
+
+    @Autowired
+    private SearchCompanyService searchCompanyService;
 
     @Test
     void 회사_등록() {
@@ -116,6 +123,24 @@ public class CompanyTest {
 
         //then
         assertThrows(CustomException.class, () -> companyService.getCompany(companyId));
+    }
+    
+    @Test
+    public void 회사_크롤링_조회_성공(){
+        //given
+        List<SearchCompanyResponseDTO> companyList = searchCompanyService.searchCompany("메일플러그");
+
+        //when
+        //then
+        assertThat(companyList.size()).isEqualTo(1);
+        for(SearchCompanyResponseDTO company : companyList){
+            System.out.println(company.name());
+            System.out.println(company.registeredNumber());
+            System.out.println(company.location());
+            System.out.println(company.ownerName());
+        }
+
+        assertThat(companyList.get(0).registeredNumber()).isEqualTo("2118703011");
     }
 
 }

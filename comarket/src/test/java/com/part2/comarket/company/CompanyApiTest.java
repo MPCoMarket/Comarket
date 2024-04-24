@@ -112,4 +112,16 @@ public class CompanyApiTest extends ApiTest {
         //then
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
     }
+
+    @Test
+    void 회사_크롤링_조회(){
+        //given
+        final String keyword = "카카오";
+
+        //when
+        final var response = CompanySteps.회사_크롤링_조회_요청(keyword);
+
+        //then
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+    }
 }

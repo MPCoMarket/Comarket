@@ -9,10 +9,10 @@ import org.springframework.http.MediaType;
 public class CompanySteps {
 
     static CompanyPostDTO 회사_등록_요청_DTO() {
-        final String name = "회사이름";
-        final String registeredNumber = "사업자등록번호";
-        final String location = "소재지";
-        final String ownerName = "대표자이름";
+        final String name = "주식회사 카카오";
+        final String registeredNumber = "1208147521";
+        final String location = "제주특별자치도 제주시 첨단로 242,";
+        final String ownerName = "홍은택";
         return new CompanyPostDTO(name, registeredNumber, location, ownerName);
     }
 
@@ -57,6 +57,15 @@ public class CompanySteps {
         return RestAssured.given().log().all()
                 .when()
                 .delete("/companies/{companyId}", companyId)
+                .then()
+                .log().all()
+                .extract();
+    }
+
+    public static ExtractableResponse<Response> 회사_크롤링_조회_요청(String keyword) {
+        return RestAssured.given().log().all()
+                .when()
+                .get("/companies/search?keyword={keyword}", keyword)
                 .then()
                 .log().all()
                 .extract();
