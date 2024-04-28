@@ -13,22 +13,28 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String email;
+    private String userName;
     private String phoneNumber;
     private String password;
-    private String userName;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "companyId")
     private Company company;
 
-    public Member(String email, String phoneNumber, String password, String userName) {
+    public Member(String email, String userName, String phoneNumber, String password) {
+        this.email = email;
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+    }
+
+    public Member(Long id, String userName, String email, String phoneNumber, String password) {
+        this.id = id;
+        this.userName = userName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.userName = userName;
     }
-
-    public Member() {}
 
 
     public Long getId() {
@@ -55,7 +61,27 @@ public class Member {
         return company;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public void setCompany(Company company) {
         this.company = company;
     }
+
 }

@@ -42,7 +42,7 @@ public class MemberApiTest extends ApiTest {
         Company company = new Company();
         company.setSecretKey(secretKey);
 
-        Member newMember = new Member("test@exemple.com", "000-0000-0000", "password", "TestUser");
+        Member newMember = new Member("test@exemple.com", "TestUser", "000-0000-0000", "password");
         newMember.setCompany(company);
 
         when(companyRepository.findBySecretKey(secretKey)).thenReturn(Optional.of(company));
