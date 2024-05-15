@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.annotation.Nullable;
+
 @Entity
 @Table(name = "category")
 @NoArgsConstructor
@@ -14,9 +16,16 @@ public class Category extends BaseTime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     // 부모 카테고리 아이디
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
-    private Category parentsId;
+    private Category parentId;
     // 카테고리 이름
     private String name;
+
+    public Category(String name, @Nullable  Category parentCategory) {
+        this.name = name;
+        if(parentCategory != null) {
+            this.parentId = parentCategory;
+        }
+    }
 }

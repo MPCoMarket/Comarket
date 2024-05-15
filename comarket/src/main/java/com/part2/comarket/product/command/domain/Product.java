@@ -1,5 +1,6 @@
 package com.part2.comarket.product.command.domain;
 
+import com.part2.comarket.category.command.domain.Category;
 import com.part2.comarket.common.entity.BaseTime;
 import com.part2.comarket.product.command.dto.request.ProductPatchRequestDTO;
 import com.part2.comarket.product.command.dto.request.ProductPostRequestDTO;
@@ -33,13 +34,14 @@ public class Product extends BaseTime {
     private char isDeleted;
     // 조회수
     private int viewCnt;
-    // 카테고리 아이디
-    private String CategoryId;
+    // 카테고리
+    private Category category;
 
-    public Product(String title, int price, String content) {
+    public Product(String title, int price, String content, Category category) {
         this.title = title;
         this.price = price;
         this.content = content;
+        this.category = category;
     }
 
     public void update(ProductPatchRequestDTO requestDto) {

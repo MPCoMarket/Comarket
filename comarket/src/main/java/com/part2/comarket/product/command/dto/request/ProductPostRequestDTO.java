@@ -1,5 +1,6 @@
 package com.part2.comarket.product.command.dto.request;
 
+import com.part2.comarket.category.command.domain.Category;
 import com.part2.comarket.product.command.domain.Product;
 import jakarta.validation.constraints.NotBlank;
 
@@ -8,10 +9,11 @@ public record ProductPostRequestDTO(
         String title,
         @NotBlank(message = "상품 가격은 필수입니다.")
         int price,
-        String content
+        String content,
+        Category category
         ) {
 
         public Product toEntity() {
-                return new Product(title, price, content);
+                return new Product(title, price, content, category);
         }
 }

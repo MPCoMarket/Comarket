@@ -30,8 +30,7 @@ public class ProductService {
         return ProductDTO.fromEntity(product);
     }
 
-    /**
-     * 상품 목록 조회
+    /**g
      * @param page
      * @param size
      * @return Page<ProductDTO>
