@@ -1,5 +1,6 @@
 package com.part2.comarket.category.command.domain;
 
+import com.part2.comarket.category.command.application.dto.CategoryRequestDTO;
 import com.part2.comarket.common.entity.BaseTime;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -26,6 +27,13 @@ public class Category extends BaseTime {
         this.name = name;
         if(parentCategory != null) {
             this.parentId = parentCategory;
+        }
+    }
+
+    public void update(CategoryRequestDTO requestDto) {
+        this.name = requestDto.name();
+        if (requestDto.parentId() != null) {
+
         }
     }
 }

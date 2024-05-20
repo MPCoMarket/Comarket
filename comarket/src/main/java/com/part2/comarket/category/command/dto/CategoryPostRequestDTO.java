@@ -4,10 +4,9 @@ import com.part2.comarket.category.command.domain.Category;
 import jakarta.validation.constraints.NotBlank;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 public record CategoryPostRequestDTO(
-        @NotBlank(message = "상품 제목은 필수입니다.")
+        @NotBlank(message = "카테고리 이름은 필수입니다.")
         String name,
         Long parentId
 ) {
