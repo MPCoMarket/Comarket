@@ -13,7 +13,6 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @Autowired
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
@@ -23,7 +22,6 @@ public class MemberController {
             @RequestBody MemberUpsertDTO request) {
 //      멤버 생성로직 캡슐화 필요
         memberService.registerMember(request.toEntity());
-
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
@@ -33,7 +31,6 @@ public class MemberController {
             @RequestBody MemberUpsertDTO request
     ) {
         memberService.updateMember(id, request.toEntity());
-
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
@@ -42,8 +39,6 @@ public class MemberController {
             @PathVariable Long id
     ) {
         memberService.deleteMember(id);
-
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-
 }

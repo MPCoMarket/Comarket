@@ -1,9 +1,12 @@
 package com.part2.comarket.member.command.application;
 
 import com.part2.comarket.member.command.domain.Member;
+import com.part2.comarket.member.exception.MemberNotFoundException;
 import com.part2.comarket.member.query.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +26,7 @@ public class MemberServiceImpl implements MemberService{
      * @param member Member to be registered
      * @return the saved Member
      */
+    @Transactional
     public Member registerMember(Member member) {
         validateMember(member);
         return memberRepository.save(member);
@@ -45,9 +49,17 @@ public class MemberServiceImpl implements MemberService{
      * @param updatedInfo Updated information for the member.
      * @return The updated Member.
      */
+    @Transactional
     public Member updateMember(long memberId, Member updatedInfo) {
         validateMember(updatedInfo);
-        return memberRepository.save(updatedInfo);
+
+        // 기존 멤버의 정보를 영속성 컨텍스트에서 조회.
+        Member existingMember = memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotFoundException(memberId));
+
+        existingMember.update(updatedInfo);
+
+        return existingMember;
     }
 
     /**
@@ -56,8 +68,13 @@ public class MemberServiceImpl implements MemberService{
      * @param id ID of the member to be deleted.
      */
     @Override
+    @Transactional
     public void deleteMember(long id) {
-        memberRepository.deleteById(id);
+        try {
+            memberRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException exception) {
+            throw new MemberNotFoundException(id);
+        }
     }
 
     /**
